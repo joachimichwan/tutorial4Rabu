@@ -18,7 +18,7 @@ public class PilotController {
 	private PilotService pilotService;
 	
 	@RequestMapping("/pilot/add")
-	public String add(@RequestParam(value ="id", required = true) String id, 
+	public String add(@RequestParam(value ="id", required = true) Integer id,
 			@RequestParam(value ="licenseNumber", required = true) String licenseNumber, 
 			@RequestParam(value ="name", required = true) String name, 
 			@RequestParam(value ="flyHour", required = true) Integer flyHour){
@@ -58,7 +58,7 @@ public class PilotController {
 	}
 	
 	@RequestMapping("/pilot/delete/{id}")
-	public String delete(@PathVariable String id, Model model){
+	public String delete(@PathVariable Integer id, Model model){
 		if(pilotService.deletePilot(id)){
 			return "delete";
 		}

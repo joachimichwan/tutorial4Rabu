@@ -8,6 +8,7 @@ import java.util.List;
 public interface PilotDB extends CrudRepository<PilotModel, Long> {
     PilotModel findByLicenseNumber(String licenseNumber);
     List<PilotModel> findAll();
-    boolean existsById(String id);
-    void deleteById(String id);
+    boolean existsById(Integer id);
+    void deleteById(Integer id);
+    Integer countByLicenseNumber(String licenseNumber);
 }

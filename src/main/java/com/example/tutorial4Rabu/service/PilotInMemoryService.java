@@ -10,24 +10,21 @@ import com.example.tutorial4Rabu.model.PilotModel;
 
 @Service
 public class PilotInMemoryService implements PilotService {
-    private List<PilotModel> archivePilot;
     private PilotDB pilotDB;
-
-    public PilotInMemoryService() {
-        archivePilot = new ArrayList<>();
-    }
 
     @Override
     public void addPilot(PilotModel pilot) { pilotDB.save(pilot); }
 
     @Override
-    public List<PilotModel> getPilotList() { return pilotDB.findAll(); }
+    public List<PilotModel> getPilotList() {
+        return pilotDB.findAll();
+    }
 
     @Override
     public PilotModel getPilotDetailByLicenseNumber(String licenseNumber) { return pilotDB.findByLicenseNumber(licenseNumber); }
 
     @Override
-    public boolean deletePilot(String id) {
+    public boolean deletePilot(Integer id) {
         if(pilotDB.existsById(id)){
             pilotDB.deleteById(id);
             return true;
@@ -36,10 +33,11 @@ public class PilotInMemoryService implements PilotService {
     }
 
     @Override
-    public void updatePilot(String licenseNumber, Integer flyHour) {
-        if(pilotDB.findByLicenseNumber(licenseNumber) != null){
-            PilotModel pilot = pilotDB.findByLicenseNumber(licenseNumber);
-            pilot.setFlyHour(flyHour);
+    public void updatePilot(PilotModel pilotModel) {
+        if(pilotDB.findByLicenseNumber(pilotModel.getLicenseNumber()) != null){
+            PilotModel pilot = pilotDB.findByLicenseNumber(pilotModel.getLicenseNumber());
+            pilot.setFlyHour(pilotModel.getFlyHour());
+            pilot.setName(pilotModel.getName());
             pilotDB.save(pilot);
         }
     }

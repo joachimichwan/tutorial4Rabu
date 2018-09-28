@@ -1,14 +1,16 @@
 package com.example.tutorial4Rabu.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "pilot")
 public class PilotModel {
 
 	@Id
-	@Column(name = "id", nullable = false)
-	private String id;
+	@Column(name = "id_pilot", nullable = false)
+	private Integer id;
 
 	@Column(name = "license_number", nullable = false)
 	private String licenseNumber;
@@ -18,19 +20,22 @@ public class PilotModel {
 
 	@Column(name = "flyHour", nullable = false)
 	private Integer flyHour;
+
+	@OneToMany(mappedBy = "pilot", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<FlightModel> pilotFlight = new ArrayList<>();
 	
-	public PilotModel(String id, String licenseNumber, String name, Integer flyHour) {
+	public PilotModel(Integer id, String licenseNumber, String name, Integer flyHour) {
 		this.id = id;
 		this.name = name;
 		this.licenseNumber = licenseNumber;
 		this.flyHour = flyHour;
 	}
 	
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
 	
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	
@@ -56,5 +61,13 @@ public class PilotModel {
 	
 	public void setFlyHour(Integer flyHour) {
 		this.flyHour = flyHour;
+	}
+
+	public List<FlightModel> getPilotFlight() {
+		return pilotFlight;
+	}
+
+	public void setPilotFlight(List<FlightModel> pilotFlight) {
+		this.pilotFlight = pilotFlight;
 	}
 }
