@@ -33,17 +33,17 @@ public class FlightModel implements Serializable {
 
     @NotNull
     @Size(max = 50)
-    @Column(name = "flight_number")
+    @Column(name = "flight_number", nullable = false)
     private String flightNumber;
 
     @NotNull
     @Size(max = 50)
-    @Column(name = "origin")
+    @Column(name = "origin", nullable = false)
     private String origin;
 
     @NotNull
     @Size(max = 50)
-    @Column(name = "destination")
+    @Column(name = "destination", nullable = false)
     private String destination;
 
     @NotNull
@@ -51,7 +51,7 @@ public class FlightModel implements Serializable {
     private Date time;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "pilot_licenseNumber", referencedColumnName = "license_number")
+    @JoinColumn(name = "pilot_licenseNumber", referencedColumnName = "license_number", nullable = false)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     @JsonIgnore
     private PilotModel pilot;

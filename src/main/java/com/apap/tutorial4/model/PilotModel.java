@@ -27,16 +27,16 @@ public class PilotModel implements Serializable {
 
     @NotNull
     @Size(max = 50)
-    @Column(name = "license_number", unique = true)
+    @Column(name = "license_number", nullable = false, unique = true)
     private String licenseNumber;
 
     @NotNull
     @Size(max = 50)
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
     @NotNull
-    @Column(name = "fly_hour")
+    @Column(name = "fly_hour", nullable = false)
     private int flyHour;
     
     @OneToMany(mappedBy = "pilot", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
