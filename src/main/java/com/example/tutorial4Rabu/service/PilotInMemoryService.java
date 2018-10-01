@@ -1,19 +1,28 @@
 package com.example.tutorial4Rabu.service;
 
-import java.util.ArrayList;
 import java.util.List;
-
 import com.example.tutorial4Rabu.repository.PilotDB;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 import com.example.tutorial4Rabu.model.PilotModel;
 
 @Service
+@Transactional
 public class PilotInMemoryService implements PilotService {
+
+    @Autowired
     private PilotDB pilotDB;
 
     @Override
-    public void addPilot(PilotModel pilot) { pilotDB.save(pilot); }
+    public PilotModel findById(long id) {
+        return pilotDB.findById(id);
+    }
+
+    @Override
+    public void addPilot(PilotModel pilot) {
+        pilotDB.save(pilot);
+    }
 
     @Override
     public List<PilotModel> getPilotList() {
@@ -21,11 +30,13 @@ public class PilotInMemoryService implements PilotService {
     }
 
     @Override
-    public PilotModel getPilotDetailByLicenseNumber(String licenseNumber) { return pilotDB.findByLicenseNumber(licenseNumber); }
+    public PilotModel getPilotDetailByLicenseNumber(String licenseNumber) {
+        return pilotDB.findByLicenseNumber(licenseNumber);
+    }
 
     @Override
-    public boolean deletePilot(Integer id) {
-        if(pilotDB.existsById(id)){
+    public boolean deletePilot(long id) {
+        if (pilotDB.existsById(id)) {
             pilotDB.deleteById(id);
             return true;
         }

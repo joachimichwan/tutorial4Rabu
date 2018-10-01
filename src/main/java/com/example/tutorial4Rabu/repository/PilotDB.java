@@ -1,14 +1,16 @@
 package com.example.tutorial4Rabu.repository;
 
-import com.example.tutorial4Rabu.model.PilotModel;
-import org.springframework.data.repository.CrudRepository;
-
 import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import com.example.tutorial4Rabu.model.PilotModel;
 
-public interface PilotDB extends CrudRepository<PilotModel, Long> {
+@Repository
+public interface PilotDB extends JpaRepository<PilotModel, Long> {
+    PilotModel findById(long id);
     PilotModel findByLicenseNumber(String licenseNumber);
     List<PilotModel> findAll();
-    boolean existsById(Integer id);
-    void deleteById(Integer id);
-    Integer countByLicenseNumber(String licenseNumber);
+    boolean existsById(long id);
+    void deleteById(long id);
+    int countByLicenseNumber(String licenseNumber);
 }

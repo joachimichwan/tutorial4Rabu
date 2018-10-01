@@ -1,12 +1,13 @@
 package com.example.tutorial4Rabu.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import com.example.tutorial4Rabu.model.FlightModel;
-import org.springframework.data.repository.CrudRepository;
 
-import java.util.List;
-
-public interface FlightDB extends CrudRepository<FlightModel, Long> {
+@Repository
+public interface FlightDB extends JpaRepository<FlightModel, Long>{
+    FlightModel findById (long id);
     FlightModel findByFlightNumber(String flightNumber);
-    List<FlightModel> findAllByPilotLicenseNumber(String pilotLicenseNumber);
-    List<FlightModel> findAll();
+    boolean existsById(long id);
+    void deleteById(long id);
 }

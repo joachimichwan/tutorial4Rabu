@@ -5,10 +5,16 @@
 	</head>
 	<body>
 		<div th:each="pilot : ${pilotList}">
-			<h3 th:text="${pilot.id}"></h3>
-			<h3 th:text="${pilot.licenseNumber}"></h3>
-			<h3 th:text="${pilot.name}"></h3>
-			<h3 th:text="${pilot.flyHour}"></h3>
+			<h5 th:text="'Pilot License Number : ' + ${pilot.licenseNumber}"></h5>
+			<h5 th:text="'Name : ' + ${pilot.name}"></h5>
+			<h5 th:text="'Fly Hour : ' + ${pilot.flyHour}"></h5>
+			<form action="/pilot/view" method="get">
+				<input type="hidden" name="licenseNumber" th:value="*{pilot.licenseNumber}">
+				<input type="submit" value="Lihat Penerbangan"></input>
+			</form>
+			<td><a th:href="'/pilot/update/' + ${pilot.id}">Update</a></td>
+			<td><a th:href="'/pilot/delete/' + ${pilot.id}">Delete</a></td>
+			<hr>
 		</div>
 	</body>
 </html>
